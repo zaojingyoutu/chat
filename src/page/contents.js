@@ -32,14 +32,16 @@ function Contents(props) {
       <div
         ref={divRef}
         style={{
-          width: "100%",
-          height: "700px",
+          width: "98.5%",
+          height: "80vh",
           overflowY: "auto",
-          border: "1px solid black",
+          // border: "1px solid black",
           padding: "10px",
           backgroundColor: "white",
+          fontSize:'large'
         }}
       >
+        <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>什么都可以问我哦！</p>
         {data.map((item) => {
           if (item.sender === "human") {
             return (
@@ -67,7 +69,7 @@ function Contents(props) {
             );
           } else {
             return (
-              <div>
+              <div >
                 <pre
                   style={{
                     background: "#e6e8eb",

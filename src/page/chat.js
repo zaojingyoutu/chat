@@ -20,10 +20,13 @@ function ChatMessages(props) {
   return (
     <div style={{
         display: 'flex',
-        width:'100%',
+        width:'33%',
         height:'35px',
-        // left: '33%',
+        justifyContent: 'center',
         position: 'absolute',
+        alignItems: 'center',
+        left: '31%',
+        padding:'3Px 3px'
       }}>
       <textarea 
         type="text" 
@@ -33,6 +36,7 @@ function ChatMessages(props) {
             width: 'auto',
             flexGrow: 1, 
             minWidth: 200,
+            fontSize:'large'
           }}
       />
 
