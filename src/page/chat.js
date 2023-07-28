@@ -6,11 +6,19 @@ function ChatMessages(props) {
   const [status, setStatus] = useState('idle');
 
   const submitText = () => {
-    let url = `https://d9wqfr-8001.csb.app/claude/append_message?conversation_uuid=${props.uuid}&prompt=${inputText}`;
+    // let url = `https://d9wqfr-8000.csb.app/claude/append_message?conversation_uuid=${props.uuid}&prompt=${inputText}`;
+    let url ='https://d9wqfr-8000.csb.app/claude/chat_message'
     props.onMessage({'text':inputText,'sender':'human'})
     setInputText('')
     setStatus('pending'); 
-    fetch(url)
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({conversation_uuid:props.uuid,prompt:inputText})
+    };
+    fetch(url,options)
       .then(res => res.json())
       .then(data => {props.onMessage({'text':data.data,'sender':'assistant'}) ;setStatus('success'); }
       )
@@ -26,7 +34,7 @@ function ChatMessages(props) {
         position: 'absolute',
         alignItems: 'center',
         left: '31%',
-        padding:'3Px 3px'
+        padding:'10px'
       }}>
       <textarea 
         type="text" 
@@ -36,7 +44,8 @@ function ChatMessages(props) {
             width: 'auto',
             flexGrow: 1, 
             minWidth: 200,
-            fontSize:'large'
+            fontSize:'large',
+            margin:'5px'
           }}
       />
 

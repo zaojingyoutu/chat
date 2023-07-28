@@ -11,7 +11,7 @@ export default function App() {
   const [chatName, setchatName] = useState();
 
   useEffect(() => {
-    fetch("https://d9wqfr-8001.csb.app/claude/history_conversation")
+    fetch("https://d9wqfr-8000.csb.app/claude/history_conversation")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -33,7 +33,7 @@ export default function App() {
   };
 
   return (
-    <div>        <h2 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>claude2</h2>
+    <div style={{background:'#efede6',height:'100vh'}}>        <h2 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>claude2</h2>
 
       <Select options={data} value={chatName} onChange={handleChange} />
       <CreateChat options={setData} onChange={creatChange} onNameChange={creatNameChange}></CreateChat>

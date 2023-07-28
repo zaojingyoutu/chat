@@ -13,7 +13,7 @@ function CreateChat(props) {
           onConfirm={(e) => {
             setShowModal(false);
             fetch(
-              "https://d9wqfr-8001.csb.app/claude/chat_conversation?name=" + e
+              "https://d9wqfr-8000.csb.app/claude/chat_conversation?name=" + e
             )
               .then((res) => res.json())
               .then((data) => {

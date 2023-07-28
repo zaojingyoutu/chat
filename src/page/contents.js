@@ -6,7 +6,7 @@ function Contents(props) {
   let url;
   if (props.options) {
     url =
-      "https://d9wqfr-8001.csb.app/claude/history_conversation_contents?conversation_uuid=" +
+      "https://d9wqfr-8000.csb.app/claude/history_conversation_contents?conversation_uuid=" +
       props.options;
   }
   useEffect(() => {
@@ -32,13 +32,16 @@ function Contents(props) {
       <div
         ref={divRef}
         style={{
-          width: "98.5%",
+
           height: "80vh",
           overflowY: "auto",
           // border: "1px solid black",
           padding: "10px",
           backgroundColor: "white",
-          fontSize:'large'
+          fontSize:'large',
+          width:'45%',
+          left:'25%',
+          position: 'relative'  
         }}
       >
         <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>什么都可以问我哦！</p>
@@ -77,7 +80,8 @@ function Contents(props) {
                     wordBreak: "break-all",
                     whiteSpace: "pre-wrap",
                     padding:"2px 5px",
-                    borderRadius: '10px'                   
+                    borderRadius: '10px' ,
+                                    
                   }}
                 >
                   {item.text}
