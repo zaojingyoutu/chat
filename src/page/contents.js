@@ -33,19 +33,25 @@ function Contents(props) {
         ref={divRef}
         style={{
 
-          height: "80vh",
+          height: "75vh",
           overflowY: "auto",
           // border: "1px solid black",
           padding: "10px",
           backgroundColor: "white",
           fontSize:'large',
-          width:'45%',
-          left:'25%',
+          width:'70%',
+          left:'15%',
           position: 'relative'  
         }}
       >
         <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>什么都可以问我哦！</p>
         {data.map((item) => {
+          let replacedText  = item.text;
+
+          
+          // const html = marked(replacedText);
+
+          // console.log(html);
           if (item.sender === "human") {
             return (
               <div
@@ -55,7 +61,7 @@ function Contents(props) {
                 }}
               >
                 <div style={{ display: "inline-block" }}>
-                  <pre
+                  <p
                     style={{
                       background: "#dfd6c8",
                       maxWidth: "100%",
@@ -65,15 +71,15 @@ function Contents(props) {
                     borderRadius: '10px'
                     }}
                   >
-                    {item.text}
-                  </pre>
+                    {replacedText}
+                  </p>
                 </div>
               </div>
             );
           } else {
             return (
               <div >
-                <pre
+                <p
                   style={{
                     background: "#e6e8eb",
                     maxWidth: "100%",
@@ -84,8 +90,9 @@ function Contents(props) {
                                     
                   }}
                 >
-                  {item.text}
-                </pre>
+                  {replacedText}
+
+                </p>
               </div>
             );
           }

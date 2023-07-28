@@ -29,7 +29,7 @@ function ChatMessages(props) {
     <div style={{
         display: 'flex',
         width:'33%',
-        height:'35px',
+        height:'50px',
         justifyContent: 'center',
         position: 'absolute',
         alignItems: 'center',
