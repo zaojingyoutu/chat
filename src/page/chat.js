@@ -34,7 +34,9 @@ function ChatMessages(props) {
         position: 'absolute',
         alignItems: 'center',
         left: '31%',
-        padding:'10px'
+        padding:'10px',
+        bottom: '0',
+        zIndex: '999'
       }}>
       <textarea 
         type="text" 
@@ -45,7 +47,9 @@ function ChatMessages(props) {
             flexGrow: 1, 
             minWidth: 200,
             fontSize:'large',
-            margin:'5px'
+            margin:'5px',
+            border: '1px solid black',
+            borderRadius: '10px' ,
           }}
       />
 

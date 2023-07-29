@@ -26,29 +26,44 @@ function Contents(props) {
   useEffect(() => {
     divRef.current.scrollTo(0, divRef.current.scrollHeight);
   }, [data]);
-
+  let width = "70%";
+  let left = '15%';
+  let height = '75vh';
+  if (
+    navigator.userAgent.match(/(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/) ) {
+     // eslint-disable-next-line no-const-assign
+     width = "90%";
+     left = '0'
+     height = '65vh'   
+  } 
   return (
     <div>
       <div
         ref={divRef}
         style={{
-
-          height: "75vh",
+          height: height,
           overflowY: "auto",
           // border: "1px solid black",
           padding: "10px",
           backgroundColor: "white",
-          fontSize:'large',
-          width:'70%',
-          left:'15%',
-          position: 'relative'  
+          fontSize: "large",
+          width: width,
+          left: left,
+          position: "relative",
         }}
       >
-        <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>什么都可以问我哦！</p>
+        <p
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          什么都可以问我哦！
+        </p>
         {data.map((item) => {
-          let replacedText  = item.text;
+          let replacedText = item.text;
 
-          
           // const html = marked(replacedText);
 
           // console.log(html);
@@ -67,8 +82,8 @@ function Contents(props) {
                       maxWidth: "100%",
                       wordBreak: "break-all",
                       whiteSpace: "pre-wrap",
-                      padding:"2px 5px",
-                    borderRadius: '10px'
+                      padding: "2px 5px",
+                      borderRadius: "10px",
                     }}
                   >
                     {replacedText}
@@ -78,20 +93,18 @@ function Contents(props) {
             );
           } else {
             return (
-              <div >
+              <div>
                 <p
                   style={{
                     background: "#e6e8eb",
                     maxWidth: "100%",
                     wordBreak: "break-all",
                     whiteSpace: "pre-wrap",
-                    padding:"2px 5px",
-                    borderRadius: '10px' ,
-                                    
+                    padding: "2px 5px",
+                    borderRadius: "10px",
                   }}
                 >
                   {replacedText}
-
                 </p>
               </div>
             );
