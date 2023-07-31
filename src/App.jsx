@@ -2,7 +2,6 @@ import "./App.css";
 import Select from "./page/select";
 import Contents from "./page/contents";
 import CreateChat from "./page/createChat";
-
 import React, { useState, useEffect } from "react";
 
 export default function App() {
@@ -34,7 +33,6 @@ export default function App() {
 
   return (
     <div style={{background:'#efede6',height:'100vh'}}>        <h2 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>claude2</h2>
-
       <Select options={data} value={chatName} onChange={handleChange} />
       <CreateChat options={setData} onChange={creatChange} onNameChange={creatNameChange}></CreateChat>
       <Contents options={uuid} />
