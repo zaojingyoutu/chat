@@ -19,7 +19,6 @@ function Contents(props) {
   }, [url]);
 
   const handleMessage = (Message) => {
-    console.info(Message)
     if (Message.index === 1 || Message.sender==='human') {
       setData((prev) => [...prev, Message]);
     } else {
@@ -73,10 +72,6 @@ function Contents(props) {
         </p>
         {data.map((item) => {
           let replacedText = item.text;
-
-          // const html = marked(replacedText);
-
-          // console.log(html);
           if (item.sender === "human") {
             return (
               <div
