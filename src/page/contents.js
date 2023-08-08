@@ -19,7 +19,17 @@ function Contents(props) {
   }, [url]);
 
   const handleMessage = (Message) => {
-    setData((prev) => [...prev, Message]);
+    console.info(Message)
+    if (Message.index === 1 || Message.sender==='human') {
+      setData((prev) => [...prev, Message]);
+    } else {
+      setData(prev => {
+        const newState = [...prev]; // 先拷贝一份
+        newState[newState.length - 1] = Message; // 修改副本
+        return newState; // 返回新的状态对象
+      })     
+    }
+    
   };
   const divRef = useRef(null);
 
