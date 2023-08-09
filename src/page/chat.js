@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 
 function ChatMessages(props) {
   const [inputText, setInputText] = useState("");
@@ -64,6 +64,21 @@ function ChatMessages(props) {
       setStatus("success");
     }).catch(() => setStatus("error"));
   };
+  const textareaRef = useRef(null);
+  const maxHeight = 100;
+
+  const onChange = (e) => {
+    setInputText(e.target.value)
+    const textarea = textareaRef.current;
+    let heightDiff = textarea.scrollHeight - textarea.clientHeight;
+    if(heightDiff > 0){
+      textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + 'px';  
+    }
+    
+  }
+
+
+
   return (
     <div
       style={{
@@ -81,8 +96,10 @@ function ChatMessages(props) {
     >
       <textarea
         type="text"
+        ref={textareaRef}
         value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
+        // onChange={(e) => setInputText(e.target.value)}
+        onChange={onChange}
         style={{
           width: "auto",
           flexGrow: 1,
