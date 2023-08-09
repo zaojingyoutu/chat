@@ -10,6 +10,7 @@ function ChatMessages(props) {
     props.onMessage({ text: inputText, sender: "human" });
     setInputText("");
     setStatus("pending");
+    textareaRef.current.style.height = 'auto';
     const options = {
       method: "POST",
       headers: {
@@ -27,6 +28,7 @@ function ChatMessages(props) {
       let index = 0
       // 定义一个解码器
       const decoder = new TextDecoder();
+      let msg = ''
       // 定义一个循环函数
       function read() {
         // 读取数据块
@@ -37,25 +39,12 @@ function ChatMessages(props) {
           }
           // 将数据块转换为字符串
           const chunk = decoder.decode(value);
-          // 分割数据块
-          const lines = chunk.split('\n');
-          // 遍历每一行
-          for (const line of lines) {
-            // 忽略空行和注释行
-            if (line === '' || line.startsWith(':')) {
-              continue;
+          const regex = /"completion":"([^"]*)"/g;
+          const matches = chunk.matchAll(regex);
+          for (const match of matches) {
+            msg = msg +  match[1]
+            props.onMessage({ index: ++index, text: msg.replace(/\\\\n/g, '%%%').replace(/\\n/g, '\n').replace(/%%%/g, '\\n'), sender: "assistant" });
             }
-            // 如果是 data 行，打印出来
-            if (line.startsWith('data:')) {
-              try {
-                const json = JSON.parse(line.slice(5));
-                props.onMessage({ index: ++index, text:json.completion , sender: "assistant" });
-              } catch (error) {
-                
-              }
-            }
-          }
-          // 继续读取下一个数据块
           read();
         });
       }
@@ -74,7 +63,6 @@ function ChatMessages(props) {
     if(heightDiff > 0){
       textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + 'px';  
     }
-    
   }
 
 
