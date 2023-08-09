@@ -98,7 +98,6 @@ function ChatMessages(props) {
         type="text"
         ref={textareaRef}
         value={inputText}
-        // onChange={(e) => setInputText(e.target.value)}
         onChange={onChange}
         style={{
           width: "auto",
