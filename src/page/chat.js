@@ -43,7 +43,7 @@ function ChatMessages(props) {
           const matches = chunk.matchAll(regex);
           for (const match of matches) {
             msg = msg +  match[1]
-            props.onMessage({ index: ++index, text: msg.replace(/\\\\n/g, '%%%').replace(/\\n/g, '\n').replace(/%%%/g, '\\n'), sender: "assistant" });
+            props.onMessage({ index: ++index, text: msg.replace(/\\\\n/g, '我是占位符').replace(/\\n/g, '\n').replace(/我是占位符/g, '\\n'), sender: "assistant" });
             }
           read();
         });
