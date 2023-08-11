@@ -1,16 +1,16 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 
 function ChatMessages(props) {
   const [inputText, setInputText] = useState("");
   const [status, setStatus] = useState("idle");
-  
+
   const submitText = () => {
     // let url = `https://d9wqfr-8000.csb.app/claude/append_message?conversation_uuid=${props.uuid}&prompt=${inputText}`;
     let url = "https://d9wqfr-8000.csb.app/claude/append_message";
     props.onMessage({ text: inputText, sender: "human" });
     setInputText("");
     setStatus("pending");
-    textareaRef.current.style.height = 'auto';
+    textareaRef.current.style.height = "auto";
     const options = {
       method: "POST",
       headers: {
@@ -21,51 +21,65 @@ function ChatMessages(props) {
         prompt: inputText,
       }),
     };
+
     fetch(url, options)
-    .then(response => {
-      // 获取 reader 对象
-      const reader = response.body.getReader();
-      let index = 0
-      // 定义一个解码器
-      const decoder = new TextDecoder();
-      let msg = ''
-      // 定义一个循环函数
-      function read() {
-        // 读取数据块
-        reader.read().then(({ value, done }) => {
-          // 如果读取完毕，退出循环
-          if (done) {
-            return;
-          }
-          // 将数据块转换为字符串
-          const chunk = decoder.decode(value);
-          const regex = /"completion":"([^"]*)"/g;
-          const matches = chunk.matchAll(regex);
-          for (const match of matches) {
-            msg = msg +  match[1]
-            props.onMessage({ index: ++index, text: msg.replace(/\\\\n/g, '我是占位符').replace(/\\n/g, '\n').replace(/我是占位符/g, '\\n'), sender: "assistant" });
+      .then((response) => {
+        // 获取 reader 对象
+        const reader = response.body.getReader();
+        let index = 0;
+        // 定义一个解码器
+        const decoder = new TextDecoder();
+        let raw_resp = "";
+        // 定义一个循环函数
+        function read() {
+          // 读取数据块
+          reader.read().then(({ value, done }) => {
+            // 如果读取完毕，退出循环
+            if (done) {
+              return;
             }
-          read();
-        });
-      }
-      // 开始循环读取
-      read();
-      setStatus("success");
-    }).catch(() => setStatus("error"));
+            // 将数据块转换为字符串
+            const chunk = decoder.decode(value);
+            raw_resp = raw_resp + chunk;
+            let msg = "";
+            const lines = raw_resp.split("\n");
+            for (const line of lines) {
+              if (line === "" || line.startsWith(":")) {
+                continue;
+              }
+              if (line.startsWith("data:")) {
+                try {
+                  msg = msg + JSON.parse(line.slice(5)).completion;
+                  props.onMessage({
+                    index: ++index,
+                    text: msg,
+                    sender: "assistant",
+                  });
+                } catch {
+                  continue;
+                }
+              }
+            }
+            read();
+          });
+        }
+        // 开始循环读取
+        read();
+        setStatus("success");
+      })
+      .catch(() => setStatus("error"));
   };
   const textareaRef = useRef(null);
   const maxHeight = 100;
 
   const onChange = (e) => {
-    setInputText(e.target.value)
+    setInputText(e.target.value);
     const textarea = textareaRef.current;
     let heightDiff = textarea.scrollHeight - textarea.clientHeight;
-    if(heightDiff > 0){
-      textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + 'px';  
+    if (heightDiff > 0) {
+      textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + "px";
     }
-  }
-
-
+  };
 
   return (
     <div
