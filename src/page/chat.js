@@ -41,7 +41,7 @@ function ChatMessages(props) {
             // 将数据块转换为字符串
             const chunk = decoder.decode(value);
             raw_resp = raw_resp + chunk;
-            let msg = "";
+            let msg = [];
             const lines = raw_resp.split("\n");
             for (const line of lines) {
               if (line === "" || line.startsWith(":")) {
@@ -49,10 +49,10 @@ function ChatMessages(props) {
               }
               if (line.startsWith("data:")) {
                 try {
-                  msg = msg + JSON.parse(line.slice(5)).completion;
+                  msg.push(JSON.parse(line.slice(5)).completion);
                   props.onMessage({
                     index: ++index,
-                    text: msg,
+                    text: msg.join(''),
                     sender: "assistant",
                   });
                 } catch {
