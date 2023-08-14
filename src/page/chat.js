@@ -29,7 +29,7 @@ function ChatMessages(props) {
         let index = 0;
         // 定义一个解码器
         const decoder = new TextDecoder();
-        let raw_resp = "";
+        let raw_resp = [];
         // 定义一个循环函数
         function read() {
           // 读取数据块
@@ -40,9 +40,9 @@ function ChatMessages(props) {
             }
             // 将数据块转换为字符串
             const chunk = decoder.decode(value);
-            raw_resp = raw_resp + chunk;
+            raw_resp.push(chunk)
             let msg = [];
-            const lines = raw_resp.split("\n");
+            const lines = raw_resp.join('').split("\n");
             for (const line of lines) {
               if (line === "" || line.startsWith(":")) {
                 continue;
