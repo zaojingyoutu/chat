@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import ChatMessages from "./chat";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 function Contents(props) {
   const [data, setData] = useState([]);
@@ -19,16 +22,15 @@ function Contents(props) {
   }, [url]);
 
   const handleMessage = (Message) => {
-    if (Message.index === 1 || Message.sender==='human') {
+    if (Message.index === 1 || Message.sender === "human") {
       setData((prev) => [...prev, Message]);
     } else {
-      setData(prev => {
+      setData((prev) => {
         const newState = [...prev]; // 先拷贝一份
         newState[newState.length - 1] = Message; // 修改副本
         return newState; // 返回新的状态对象
-      })     
+      });
     }
-    
   };
   const divRef = useRef(null);
 
@@ -36,15 +38,18 @@ function Contents(props) {
     divRef.current.scrollTo(0, divRef.current.scrollHeight);
   }, [data]);
   let width = "70%";
-  let left = '15%';
-  let height = '75vh';
+  let left = "15%";
+  let height = "75vh";
   if (
-    navigator.userAgent.match(/(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/) ) {
-     // eslint-disable-next-line no-const-assign
-     width = "90%";
-     left = '0'
-     height = '65vh'   
-  } 
+    navigator.userAgent.match(
+      /(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/
+    )
+  ) {
+    // eslint-disable-next-line no-const-assign
+    width = "90%";
+    left = "0";
+    height = "65vh";
+  }
   return (
     <div>
       <div
@@ -78,39 +83,75 @@ function Contents(props) {
                 style={{
                   display: "flex",
                   justifyContent: "flex-end",
+                  padding: "15px"
                 }}
               >
-                <div style={{ display: "inline-block" }}>
-                  <p
-                    style={{
+                <div  style={{
                       background: "#dfd6c8",
                       maxWidth: "100%",
                       wordBreak: "break-all",
-                      whiteSpace: "pre-wrap",
                       padding: "2px 5px",
                       borderRadius: "10px",
-                    }}
-                  >
-                    {replacedText}
-                  </p>
+                      display: "inline-block" ,
+                      margin:0
+                    }}>
+                  <ReactMarkdown
+                  children={replacedText}
+                  components={{
+                    code({ node, inline, className, children, ...props }) {
+                      const match = /language-(\w+)/.exec(className || "");
+                      return !inline && match ? (
+                        <SyntaxHighlighter
+                          children={String(children).replace(/\n$/, "")}
+                          style={dark}
+                          language={match[1]}
+                          PreTag="div"
+                          {...props}
+                        />
+                      ) : (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      );
+                    },
+                  }}
+                ></ReactMarkdown>
                 </div>
               </div>
             );
           } else {
             return (
-              <div>
-                <p
-                  style={{
-                    background: "#e6e8eb",
-                    maxWidth: "100%",
-                    wordBreak: "break-all",
-                    whiteSpace: "pre-wrap",
-                    padding: "2px 5px",
-                    borderRadius: "10px",
+              <div
+                style={{
+                  background: "#e6e8eb",
+                  maxWidth: "80%",
+                  wordBreak: "break-all",
+                  padding: "2px 5px",
+                  borderRadius: "10px",
+                  margin:0
+                }}
+              >
+                <ReactMarkdown
+                  children={replacedText}
+                  components={{
+                    code({ node, inline, className, children, ...props }) {
+                      const match = /language-(\w+)/.exec(className || "");
+                      return !inline && match ? (
+                        <SyntaxHighlighter
+                          children={String(children).replace(/\n$/, "")}
+                          style={dark}
+                          language={match[1]}
+                          PreTag="div"
+                          {...props}
+                        />
+                      ) : (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      );
+                    },
                   }}
-                >
-                  {replacedText}
-                </p>
+                ></ReactMarkdown>
               </div>
             );
           }
