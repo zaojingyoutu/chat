@@ -124,10 +124,11 @@ function Contents(props) {
               <div
                 style={{
                   background: "#e6e8eb",
-                  maxWidth: "80%",
+                  // maxWidth: "80%",
                   wordBreak: "break-all",
                   padding: "2px 5px",
                   borderRadius: "10px",
+                  // lineHeight: '1px'
                   margin:0
                 }}
               >
