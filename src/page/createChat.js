@@ -13,7 +13,7 @@ function CreateChat(props) {
           onConfirm={(e) => {
             setShowModal(false);
             fetch(
-              "https://d9wqfr-8000.csb.app/claude/chat_conversation?name=" + e
+              "https://j8lk3p-8000.csb.app/claude/chat_conversation?name=" + e
             )
               .then((res) => res.json())
               .then((data) => {
@@ -34,7 +34,6 @@ function CreateChat(props) {
 function Modal({ onConfirm, onCancel, uuid }) {
   const [input, setInput] = useState("");
   const [creat, setcreat] = useState("none");
-  console.log(11111111111, uuid);
 
   return (
     <div
@@ -68,7 +67,7 @@ function Modal({ onConfirm, onCancel, uuid }) {
       </div>
       <span 
         onClick={() => {
-          fetch("https://d9wqfr-8000.csb.app/claude/" + uuid, {
+          fetch("https://j8lk3p-8000.csb.app/claude/" + uuid, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",

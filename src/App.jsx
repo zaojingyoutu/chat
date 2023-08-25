@@ -10,7 +10,7 @@ export default function App() {
   const [chatName, setchatName] = useState();
 
   useEffect(() => {
-    fetch("https://d9wqfr-8000.csb.app/claude/get_conversation")
+    fetch("https://j8lk3p-8000.csb.app/claude/get_conversation")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
