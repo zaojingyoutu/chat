@@ -32,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <div style={{background:'#efede6',height:'100vh'}}>        <h2 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>claude2</h2>
+    <div style={{background:'#efede6',height:'85vh'}}>        <h2 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>claude2</h2>
       <Select options={data} value={chatName} onChange={handleChange} />
       <CreateChat options={setData} onChange={creatChange} onNameChange={creatNameChange} uuid={uuid} ></CreateChat>
       <Contents options={uuid} />

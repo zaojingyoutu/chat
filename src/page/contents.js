@@ -40,6 +40,7 @@ function Contents(props) {
   let width = "70%";
   let left = "15%";
   let height = "75vh";
+  let copyLeft = '93%'
   if (
     navigator.userAgent.match(
       /(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/
@@ -47,9 +48,16 @@ function Contents(props) {
   ) {
     // eslint-disable-next-line no-const-assign
     width = "90%";
-    left = "0";
+    left = "2%";
     height = "65vh";
+    copyLeft = "84%"
   }
+
+// 点击事件处理函数
+const copyToClipboard = (replacedText) => {
+  navigator.clipboard.writeText(replacedText)
+}
+
   return (
     <div>
       <div
@@ -124,14 +132,13 @@ function Contents(props) {
               <div
                 style={{
                   background: "#e6e8eb",
-                  // maxWidth: "80%",
                   wordBreak: "break-all",
                   padding: "2px 5px",
                   borderRadius: "10px",
-                  // lineHeight: '1px'
                   margin:0
                 }}
               >
+                <button id="copyBtn" onClick={() => copyToClipboard(replacedText)} style={{left:copyLeft,position:"absolute"}}>复制</button>
                 <ReactMarkdown
                   children={replacedText}
                   components={{
