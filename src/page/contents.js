@@ -40,7 +40,6 @@ function Contents(props) {
   let width = "70%";
   let left = "15%";
   let height = "75vh";
-  let copyLeft = '93%'
   if (
     navigator.userAgent.match(
       /(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/
@@ -49,14 +48,13 @@ function Contents(props) {
     // eslint-disable-next-line no-const-assign
     width = "90%";
     left = "2%";
-    height = "65vh";
-    copyLeft = "84%"
+    height = "75vh";
   }
 
-// 点击事件处理函数
-const copyToClipboard = (replacedText) => {
-  navigator.clipboard.writeText(replacedText)
-}
+  // 点击事件处理函数
+  const copyToClipboard = (replacedText) => {
+    navigator.clipboard.writeText(replacedText);
+  };
 
   return (
     <div>
@@ -91,39 +89,41 @@ const copyToClipboard = (replacedText) => {
                 style={{
                   display: "flex",
                   justifyContent: "flex-end",
-                  padding: "15px"
+                  padding: "15px",
                 }}
               >
-                <div  style={{
-                      background: "#dfd6c8",
-                      maxWidth: "100%",
-                      wordBreak: "break-all",
-                      padding: "2px 5px",
-                      borderRadius: "10px",
-                      display: "inline-block" ,
-                      margin:0
-                    }}>
-                  <ReactMarkdown
-                  children={replacedText}
-                  components={{
-                    code({ node, inline, className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || "");
-                      return !inline && match ? (
-                        <SyntaxHighlighter
-                          children={String(children).replace(/\n$/, "")}
-                          style={dark}
-                          language={match[1]}
-                          PreTag="div"
-                          {...props}
-                        />
-                      ) : (
-                        <code className={className} {...props}>
-                          {children}
-                        </code>
-                      );
-                    },
+                <div
+                  style={{
+                    background: "#dfd6c8",
+                    maxWidth: "100%",
+                    wordBreak: "break-all",
+                    padding: "2px 5px",
+                    borderRadius: "10px",
+                    display: "inline-block",
+                    margin: 0,
                   }}
-                ></ReactMarkdown>
+                >
+                  <ReactMarkdown
+                    children={replacedText}
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || "");
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            children={String(children).replace(/\n$/, "")}
+                            style={dark}
+                            language={match[1]}
+                            PreTag="div"
+                            {...props}
+                          />
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  ></ReactMarkdown>
                 </div>
               </div>
             );
@@ -135,10 +135,18 @@ const copyToClipboard = (replacedText) => {
                   wordBreak: "break-all",
                   padding: "2px 5px",
                   borderRadius: "10px",
-                  margin:0
+                  margin: 0,
                 }}
               >
-                <button id="copyBtn" onClick={() => copyToClipboard(replacedText)} style={{left:copyLeft,position:"absolute"}}>复制</button>
+                <div style={{ right: "0%", position: "absolute",paddingRight:'14px' }}>
+                  <button
+                    id="copyBtn"
+                    onClick={() => copyToClipboard(replacedText)}
+                    
+                  >
+                    复制
+                  </button>
+                </div>
                 <ReactMarkdown
                   children={replacedText}
                   components={{
