@@ -45,7 +45,6 @@ function Contents(props) {
       /(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/
     )
   ) {
-    // eslint-disable-next-line no-const-assign
     width = "90%";
     left = "2%";
     height = "75vh";

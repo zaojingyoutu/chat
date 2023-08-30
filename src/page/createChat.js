@@ -64,7 +64,7 @@ function Modal({ onConfirm, onCancel, uuid }) {
       
       <div style={{ display: creat }}>
         <input value={input} onChange={(e) => setInput(e.target.value)} />
-        <button onClick={() => onConfirm(input) } style={{position: 'absolute', left: "75%"}}>创建</button>
+        <button onClick={() => onConfirm(input) } style={{position: 'absolute', right: "0%"}}>创建</button>
       </div>
       <span 
         onClick={() => {
@@ -86,7 +86,7 @@ function Modal({ onConfirm, onCancel, uuid }) {
 
       <button
         onClick={onCancel}
-        style={{ bottom: 0, position: "absolute", left: "75%" }}
+        style={{ bottom: 0, position: "absolute", right: "0%" }}
       >
         关闭
       </button>
