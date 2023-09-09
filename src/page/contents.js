@@ -42,7 +42,7 @@ function Contents(props) {
   let height = "75vh";
   if (window.matchMedia('(max-width: 600px)').matches) {
     width = "95%";
-    left = "0%";
+    left = "1%";
   } 
   if (
     navigator.userAgent.match(
