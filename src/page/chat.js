@@ -85,8 +85,8 @@ function ChatMessages(props) {
     <div
       style={{
         display: "flex",
-        width: "33%",
-        height: "50px",
+        width: "40%",
+        height: "7%",
         justifyContent: "center",
         position: "absolute",
         alignItems: "center",
@@ -105,10 +105,11 @@ function ChatMessages(props) {
           width: "auto",
           flexGrow: 1,
           minWidth: 200,
-          fontSize: "large",
+          fontSize: "x-large",
           margin: "5px",
           border: "1px solid black",
           borderRadius: "10px",
+          height:'100%',
         }}
         onKeyDown={(e) => {
           if (

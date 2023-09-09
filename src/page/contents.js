@@ -45,8 +45,8 @@ function Contents(props) {
       /(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/
     )
   ) {
-    width = "90%";
-    left = "2%";
+    width = "95%";
+    left = "0%";
     height = "75vh";
   }
 
