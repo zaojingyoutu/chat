@@ -40,6 +40,9 @@ function Contents(props) {
   let width = "70%";
   let left = "15%";
   let height = "75vh";
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    width = "95%";
+  } 
   if (
     navigator.userAgent.match(
       /(iPhone|iPad|iPod|Android|Windows Phone|Mobile|BlackBerry|Palm|Tablet|iPad)/
