@@ -43,6 +43,7 @@ function Contents(props) {
   if (window.matchMedia('(max-width: 600px)').matches) {
     width = "95%";
     left = "1%";
+    height = "71vh";
   } 
   if (
     navigator.userAgent.match(
