@@ -14,7 +14,7 @@ function CreateChat(props) {
           onConfirm={(e) => {
             setShowModal(false);
             fetch(
-              "https://j8lk3p-8000.csb.app/claude/chat_conversation?name=" + e
+              "https://4cvprt-8000.csb.app/claude/chat_conversation?name=" + e
             )
               .then((res) => res.json())
               .then((data) => {
@@ -68,7 +68,7 @@ function Modal({ onConfirm, onCancel, uuid }) {
       </div>
       <span 
         onClick={() => {
-          fetch("https://j8lk3p-8000.csb.app/claude/" + uuid, {
+          fetch("https://4cvprt-8000.csb.app/claude/" + uuid, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",

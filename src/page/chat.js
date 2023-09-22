@@ -5,8 +5,7 @@ function ChatMessages(props) {
   const [status, setStatus] = useState("idle");
 
   const submitText = () => {
-    // let url = `https://d9wqfr-8000.csb.app/claude/append_message?conversation_uuid=${props.uuid}&prompt=${inputText}`;
-    let url = "https://j8lk3p-8000.csb.app/claude/append_message";
+    let url = "https://4cvprt-8000.csb.app/claude/append_message";
     props.onMessage({ text: inputText, sender: "human" });
     setInputText("");
     setStatus("pending");
