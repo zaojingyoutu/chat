@@ -58,6 +58,13 @@ function ChatMessages(props) {
                   continue;
                 }
               }
+            } 
+            if(lines[0].slice(0,7).includes('error') ){
+              props.onMessage({
+                index: ++index,
+                text: JSON.stringify(lines),
+                sender: "assistant",
+              });
             }
             read();
           });
